@@ -1,0 +1,45 @@
+{
+  "usesTypeScript": true,
+  "usesCssModule": true,
+  "cssPreprocessor": "scss",
+  "testLibrary": "Enzyme",
+  "component": {
+    "default": {
+      "customTemplates": {
+        "component": "templates/component/Component.tsx",
+        "test": "templates/component/Component.test.tsx",
+        "style": "templates/component/style.scss"
+      },
+      "path": "src/components",
+      "withLazy": false,
+      "withStory": false,
+      "withStyle": true,
+      "withTest": true
+    },
+    "page": {
+      "customTemplates": {
+        "component": "templates/page/Page.tsx",
+        "style": "templates/page/style.scss",
+        "lazy": "templates/page/Page.lazy.tsx",
+        "test": "templates/page/Page.test.tsx"
+      },
+      "path": "src/pages",
+      "withLazy": true,
+      "withStory": false,
+      "withStyle": true,
+      "withTest": true
+    },
+    "layout": {
+      "customTemplates": {
+        "component": "templates/layout/Layout.tsx",
+        "test": "templates/layout/Layout.test.tsx",
+        "style": "templates/layout/style.scss"
+      },
+      "path": "src/layout",
+      "withLazy": false,
+      "withStory": false,
+      "withStyle": true,
+      "withTest": true
+    }
+  }
+}

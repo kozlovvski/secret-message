@@ -1,0 +1,8 @@
+// templates/layout/style.scss
+
+@import "src/scss/variables", "src/scss/mixins";
+
+.Default {
+  border: 2px solid black;
+  padding: 20px;
+}
