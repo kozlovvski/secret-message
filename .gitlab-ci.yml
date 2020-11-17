@@ -1,0 +1,52 @@
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_ID # Execute jobs in merge request context
+    - if: $CI_COMMIT_BRANCH == 'master'
+
+install:
+  image: node:12
+  stage: build
+  script:
+    - yarn
+  cache:
+    key: $CI_PROJECT_ID
+    policy: pull-push
+    paths:
+      - "node_modules"
+
+test building:
+  image: node:12
+  stage: test
+  script:
+    - CI=false yarn build
+  cache:
+    key: $CI_PROJECT_ID
+    policy: pull
+    paths:
+      - "node_modules"
+
+run unit tests:
+  image: node:12
+  stage: test
+  script:
+    - yarn test
+  cache:
+    key: $CI_PROJECT_ID
+    policy: pull
+    paths:
+      - "node_modules"
+
+test coverage:
+  image: node:12
+  stage: test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    reports:
+      junit: app/junit.xml
+  script:
+    - yarn test --colors --coverage --reporters=default --reporters=jest-junit
+  cache:
+    key: $CI_PROJECT_ID
+    policy: pull
+    paths:
+      - "node_modules"
