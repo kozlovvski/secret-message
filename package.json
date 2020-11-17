@@ -83,6 +83,6 @@
   },
   "lint-staged": {
     "*.{ts, tsx, js, jsx, scss, css, json, md}": "prettier --write",
-    "*.{ts, tsx, js, jsx}": "eslint --ext .js,.jsx,.ts,.tsx ./"
+    "*.{ts, tsx, js, jsx}": "eslint"
   }
 }
