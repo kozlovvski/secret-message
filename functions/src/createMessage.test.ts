@@ -1,24 +1,5 @@
-import * as admin from "firebase-admin";
-import * as path from "path";
-import firebaseTest = require("firebase-functions-test");
-
-const firebaseConfig = {
-  databaseURL: "https://secret-message-eb337.firebaseio.com",
-  storageBucket: "secret-message-eb337.appspot.com",
-  projectId: "secret-message-eb337",
-};
-
-const testEnv = firebaseTest(
-  firebaseConfig,
-  path.resolve("secret-message-eb337-firebase-adminsdk-xa3oc-c9168c99e1.json")
-);
-
-import myFunctions = require("../src/index"); // relative path to functions code
-
-const { createMessage } = myFunctions;
-
-const getMessageRef = (id: string) =>
-  admin.firestore().collection("secret-messages").doc(id);
+import { getMessageRef, testEnv } from "../setupTests";
+import createMessage from "./createMessage";
 
 describe("createMessage", () => {
   const wrapped = testEnv.wrap(createMessage);
