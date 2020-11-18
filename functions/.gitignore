@@ -1,6 +1,6 @@
 # Compiled JavaScript files
-**/*.js
-**/*.js.map
+lib/*.js
+lib/*.js.map
 
 # Except the ESLint config file
 !.eslintrc.js
@@ -10,3 +10,6 @@ typings/
 
 # Node.js dependency directory
 node_modules/
+
+# Firebase config
+secret-message-eb337*.json
