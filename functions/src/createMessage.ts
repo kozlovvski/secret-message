@@ -3,7 +3,7 @@ import * as functions from "firebase-functions";
 
 import { CreateSMessagePayload } from "../../src/typings/secret-message";
 
-export default functions.https.onCall(
+export const createMessage = functions.https.onCall(
   async ({ message, uid }: CreateSMessagePayload) => {
     if (typeof message !== "string" || message.length === 0) {
       // Throwing an HttpsError so that the client gets the error details.

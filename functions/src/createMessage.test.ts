@@ -1,5 +1,5 @@
 import { getMessageRef, testEnv } from "../setupTests";
-import createMessage from "./createMessage";
+import { createMessage } from "./createMessage";
 
 describe("createMessage", () => {
   const wrapped = testEnv.wrap(createMessage);
