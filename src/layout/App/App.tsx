@@ -13,7 +13,7 @@ import styles from "./App.module.scss";
 const AppLayout: React.FC = ({ children }) => {
   return (
     <div className={styles["App"]} data-testid="layout-App">
-      <div className={styles["content"]} data-testid="layout-App">
+      <div className={styles["content"]} data-testid="layout-content">
         {children}
       </div>
     </div>
