@@ -9,15 +9,19 @@
   min-height: calc(var(--vh, 1vh) * 100);
   background: repeating-linear-gradient(
     45deg,
-    $primary--light,
+    $primary--lighter,
+    $primary--lighter 50%,
     $primary--light 50%,
-    $primary 50%,
-    $primary
+    $primary--light
   );
   background-size: 20px 20px;
 
   .content {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
     padding: 20px;
     min-height: calc(var(--vh, 1vh) * 100);
   }

@@ -1,1 +1,3 @@
 $primary: #35d073;
+$primary--light: lighten($primary, $amount: 20);
+$primary--lighter: lighten($primary, $amount: 30);
