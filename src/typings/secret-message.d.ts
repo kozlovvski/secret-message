@@ -1,11 +1,17 @@
 /**
- * Response type for `listMessages` cloud function
+ * A secret message without message field.
  */
-export type ListSMessagesResponse = Array<{
+export type GenericSMessage = {
   id: string;
+  uid?: string;
   createdAt: number;
   alreadyViewed: boolean;
-}>;
+};
+
+/**
+ * Response type for `listMessages` cloud function
+ */
+export type ListSMessagesResponse = Array<GenericSMessage>;
 
 /**
  * Payload type for `checkMessage` cloud function. This function checks if a message with given id exists
@@ -24,12 +30,8 @@ export type GetSMessagePayload = {
 /**
  * Response type for `getMessage` cloud function. This function checks gets message content and deletes the message in the database
  */
-export type GetSMessageResponse = {
+export type GetSMessageResponse = GenericSMessage & {
   message?: string;
-  uid?: string;
-  id: string;
-  createdAt: number;
-  alreadyViewed: boolean;
 };
 
 /**
