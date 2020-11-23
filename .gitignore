@@ -22,3 +22,6 @@ junit.xml
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Firebase config
+secret-message-eb337*.json
