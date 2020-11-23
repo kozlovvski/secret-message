@@ -9,6 +9,7 @@
     "customize-cra": "^1.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
+    "firebase": "^8.1.1",
     "jest-enzyme": "^7.1.2",
     "less": "^3.12.2",
     "less-loader": "^7.1.0",
