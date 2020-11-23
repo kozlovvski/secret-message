@@ -14,8 +14,21 @@ export const testEnv = firebaseTest(
   path.resolve("secret-message-eb337-firebase-adminsdk-xa3oc-c9168c99e1.json")
 );
 
-export const getMessageRef = (id: string) =>
-  admin.firestore().collection("secret-messages").doc(id);
+export const getMessageSnap = async (id: string) => {
+  const querySnap = await admin
+    .firestore()
+    .collection("secret-messages")
+    .where("id", "==", id)
+    .get();
+
+  return querySnap.docs[0];
+};
+
+export const getMessageRef = async (id: string) =>
+  getMessageSnap(id).then((snap) => snap.ref);
+
+export const deleteById = async (id: string) =>
+  getMessageRef(id).then((ref) => ref.delete());
 
 admin.initializeApp();
 admin.firestore().settings({
