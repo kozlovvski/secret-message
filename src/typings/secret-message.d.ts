@@ -39,7 +39,6 @@ export type GetSMessageResponse = GenericSMessage & {
  */
 export type CreateSMessagePayload = {
   message: string;
-  uid?: string;
 };
 
 /**
