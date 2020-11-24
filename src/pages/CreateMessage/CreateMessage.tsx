@@ -5,7 +5,7 @@ import { RouteChildrenProps } from "react-router-dom";
 import { Typography } from "antd";
 
 import styles from "./CreateMessage.module.scss";
-import CreateMessageForm from "../../components/CreateMessageForm/CreateMessageForm";
+import CreateMessageForm from "../../features/add-new-message/components/CreateMessageForm/CreateMessageForm";
 import { GenericSMessage } from "../../typings/secret-message";
 
 interface ICreateMessagePageProps extends RouteChildrenProps {
