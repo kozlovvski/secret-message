@@ -1,11 +1,12 @@
 // templates/page/Page.tsx
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { RouteChildrenProps } from "react-router-dom";
 import { Typography } from "antd";
 
 import styles from "./CreateMessage.module.scss";
 import CreateMessageForm from "../../components/CreateMessageForm/CreateMessageForm";
+import { GenericSMessage } from "../../typings/secret-message";
 
 interface ICreateMessagePageProps extends RouteChildrenProps {
   children?: undefined;
@@ -35,6 +36,8 @@ const CreateMessagePage: React.FC<ICreateMessagePageProps> = ({
   location,
   match,
 }) => {
+  const [newMessage, setNewMessage] = useState<GenericSMessage>();
+  const success = useMemo(() => newMessage !== undefined, [newMessage]);
   return (
     <div className={styles["CreateMessage"]} data-testid="page-CreateMessage">
       <Typography.Title>Enter your secret message below</Typography.Title>
@@ -42,7 +45,7 @@ const CreateMessagePage: React.FC<ICreateMessagePageProps> = ({
         You can enter a password, secret message or anything that needs to be
         secure
       </Typography.Paragraph>
-      <CreateMessageForm />
+      <CreateMessageForm success={success} setNewMessage={setNewMessage} />
     </div>
   );
 };
