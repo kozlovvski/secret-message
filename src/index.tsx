@@ -1,8 +1,12 @@
+import firebase from "firebase";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import fixVH from "./util/fixVH";
+import firebaseConfig from "./secret-message-eb337-firebase-config.json";
+
+firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
