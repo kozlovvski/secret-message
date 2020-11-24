@@ -1,10 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  CreateSMessagePayload,
-  GenericSMessage,
-} from "../../typings/secret-message";
-import { AppThunk } from "../../typings/store";
-import firebase from "../../firebase";
+import { CreateSMessagePayload, GenericSMessage } from "typings/secret-message";
+import { AppThunk } from "typings/store";
+import firebase from "firebase-instance";
 import "firebase/functions";
 
 const createMessageCloud = firebase.functions().httpsCallable("createMessage");

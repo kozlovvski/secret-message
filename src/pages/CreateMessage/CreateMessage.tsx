@@ -3,7 +3,7 @@ import { Typography } from "antd";
 import React from "react";
 import { RouteChildrenProps } from "react-router-dom";
 
-import CreateMessageForm from "../../features/add-new-message/components/CreateMessageForm/CreateMessageForm";
+import CreateMessageForm from "features/add-new-message/components/CreateMessageForm/CreateMessageForm";
 import styles from "./CreateMessage.module.scss";
 
 interface ICreateMessagePageProps extends RouteChildrenProps {

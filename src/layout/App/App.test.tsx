@@ -2,7 +2,7 @@ import { mount } from "enzyme";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import { findByTestAttr } from "../../test/testUtils";
+import { findByTestAttr } from "test/testUtils";
 import AppLayout, { AppLayoutRoute } from "./App";
 
 const ChildComponent = () => <div data-testid="child-component" />;

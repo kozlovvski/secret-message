@@ -2,7 +2,7 @@ import { shallow } from "enzyme";
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { findByTestAttr } from "../../../../test/testUtils";
+import { findByTestAttr } from "test/testUtils";
 import CreateMessageForm, {
   ICreateMessageFormProps,
 } from "./CreateMessageForm";

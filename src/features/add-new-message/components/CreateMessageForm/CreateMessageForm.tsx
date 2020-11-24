@@ -3,10 +3,10 @@ import { Button, Form, Input } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 
-import useAppDispatch from "../../../../hooks/useAppDispatch";
-import { CreateSMessagePayload } from "../../../../typings/secret-message";
-import { RootState } from "../../../../typings/store";
-import { createMessage } from "../../new-message.slice";
+import useAppDispatch from "hooks/useAppDispatch";
+import { CreateSMessagePayload } from "typings/secret-message";
+import { RootState } from "typings/store";
+import { createMessage } from "features/add-new-message/new-message.slice";
 import styles from "./CreateMessageForm.module.scss";
 
 export interface ICreateMessageFormProps {
