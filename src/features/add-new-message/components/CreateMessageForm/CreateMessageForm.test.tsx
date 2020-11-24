@@ -1,18 +1,27 @@
 import { shallow } from "enzyme";
 import React from "react";
+import { useSelector } from "react-redux";
 
-import { findByTestAttr } from "../../test/testUtils";
+import { findByTestAttr } from "../../../../test/testUtils";
 import CreateMessageForm, {
   ICreateMessageFormProps,
 } from "./CreateMessageForm";
 
-const defaultProps: ICreateMessageFormProps = {
-  success: false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setNewMessage: () => {},
-};
+const mockUseSelector = useSelector as jest.Mock;
+const mockDispatch = jest.fn();
+jest.mock("react-redux", () => ({
+  useSelector: jest.fn(),
+  useDispatch: () => mockDispatch,
+}));
+
+const defaultProps: ICreateMessageFormProps = {};
 
 describe("<CreateMessageForm />", () => {
+  beforeEach(() => {
+    mockUseSelector.mockReturnValue({ success: false, loading: false });
+    mockDispatch.mockReturnValue(jest.fn());
+  });
+
   const setup = (props?: Record<string, unknown>) =>
     shallow(<CreateMessageForm {...defaultProps} {...props} />);
 
@@ -47,7 +56,8 @@ describe("<CreateMessageForm />", () => {
 
   describe("if `success` is true", () => {
     beforeEach(() => {
-      wrapper = setup({ success: true });
+      mockUseSelector.mockReturnValue({ success: true, loading: false });
+      wrapper = setup();
     });
 
     test("should mount", () => {

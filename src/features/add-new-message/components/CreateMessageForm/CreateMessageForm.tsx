@@ -1,17 +1,15 @@
 // templates/component/Component.tsx
-
 import { Button, Form, Input } from "antd";
-import React, { useState } from "react";
-import {
-  CreateSMessagePayload,
-  GenericSMessage,
-} from "../../../../typings/secret-message";
+import React from "react";
+import { useSelector } from "react-redux";
+
+import useAppDispatch from "../../../../hooks/useAppDispatch";
+import { CreateSMessagePayload } from "../../../../typings/secret-message";
+import { RootState } from "../../../../typings/store";
+import { createMessage } from "../../new-message.slice";
 import styles from "./CreateMessageForm.module.scss";
-import firebase from "firebase";
 
 export interface ICreateMessageFormProps {
-  success: boolean;
-  setNewMessage: (value: GenericSMessage) => void;
   children?: never;
 }
 
@@ -21,21 +19,14 @@ export interface ICreateMessageFormProps {
  * @return the CreateMessageForm component
  */
 
-const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
-  success,
-  setNewMessage,
-}) => {
-  const addMessage = firebase.functions().httpsCallable("createMessage");
-  const [loading, setLoading] = useState(false);
+const CreateMessageForm: React.FC<ICreateMessageFormProps> = () => {
+  const { success, loading } = useSelector(
+    (state: RootState) => state.newMessage
+  );
+  const dispatch = useAppDispatch();
 
-  const finishHandler = async ({ message }: CreateSMessagePayload) => {
-    setLoading(true);
-    const newMessage: GenericSMessage = await addMessage({ message }).then(
-      (res) => res.data
-    );
-    setNewMessage(newMessage);
-    // TODO: add new message to redux store
-    setLoading(false);
+  const finishHandler = (values: CreateSMessagePayload) => {
+    dispatch(createMessage(values));
   };
 
   return success ? null : (
@@ -43,6 +34,7 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
       className={styles["CreateMessageForm"]}
       data-testid="component-CreateMessageForm"
     >
+      loading: {String(loading)}
       <Form layout="vertical" onFinish={finishHandler}>
         <Form.Item
           name="message"
