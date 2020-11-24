@@ -4,7 +4,9 @@ import { AppThunk } from "typings/store";
 import firebase from "firebase-instance";
 import "firebase/functions";
 
-const createMessageCloud = firebase.functions().httpsCallable("createMessage");
+export const createMessageCloud = firebase
+  .functions()
+  .httpsCallable("createMessage");
 
 type NewMessageState = {
   loading: boolean;

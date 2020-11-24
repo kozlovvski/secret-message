@@ -1,13 +1,14 @@
 import { shallow } from "enzyme";
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 import { findByTestAttr } from "test/testUtils";
 import CreateMessageForm, {
   ICreateMessageFormProps,
 } from "./CreateMessageForm";
 
-const mockUseSelector = useSelector as jest.Mock;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useSelector: jest.Mock = require("react-redux").useSelector;
 const mockDispatch = jest.fn();
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
@@ -18,7 +19,7 @@ const defaultProps: ICreateMessageFormProps = {};
 
 describe("<CreateMessageForm />", () => {
   beforeEach(() => {
-    mockUseSelector.mockReturnValue({ success: false, loading: false });
+    useSelector.mockReturnValue({ success: false, loading: false });
     mockDispatch.mockReturnValue(jest.fn());
   });
 
@@ -56,7 +57,7 @@ describe("<CreateMessageForm />", () => {
 
   describe("if `success` is true", () => {
     beforeEach(() => {
-      mockUseSelector.mockReturnValue({ success: true, loading: false });
+      useSelector.mockReturnValue({ success: true, loading: false });
       wrapper = setup();
     });
 

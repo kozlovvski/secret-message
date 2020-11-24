@@ -1,10 +1,12 @@
+import type firebase from "firebase-instance";
+
 /**
  * A secret message without message field.
  */
 export type GenericSMessage = {
   id: string;
   uid?: string;
-  createdAt: number;
+  createdAt: firebase.firestore.Timestamp;
   alreadyViewed: boolean;
 };
 
