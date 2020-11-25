@@ -1,10 +1,10 @@
-import { Form } from "antd";
-import { shallow } from "enzyme";
-import React from "react";
+import "firebase/firestore";
 
-import { findByTestAttr } from "test/testUtils";
-import { CreateSMessagePayload } from "typings/secret-message";
+import { shallow } from "enzyme";
 import firebase from "firebase-instance";
+import React from "react";
+import { findByTestAttr } from "test/testUtils";
+
 import CreateMessageConfirm, {
   ICreateMessageConfirmProps,
 } from "./CreateMessageConfirm";
@@ -69,9 +69,16 @@ describe("<CreateMessageConfirm />", () => {
 
   test("should render a correct message link", () => {
     const component = findByTestAttr(wrapper, "message-link");
-    expect(
-      component.text().includes(window.location.host + "/app/123-test")
-    ).toBe(true);
+    expect(component.prop("value")).toBe(
+      window.location.host + "/message/123-test"
+    );
+  });
+
+  test("should render a correct message link", () => {
+    const component = findByTestAttr(wrapper, "message-link");
+    expect(component.prop("value")).toBe(
+      window.location.host + "/message/123-test"
+    );
   });
 
   test("should render a create another message button", () => {
