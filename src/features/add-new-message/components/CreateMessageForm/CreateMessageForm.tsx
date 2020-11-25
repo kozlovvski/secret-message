@@ -1,5 +1,5 @@
 // templates/component/Component.tsx
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -31,10 +31,16 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = () => {
 
   return success ? null : (
     <div
-      className={styles["CreateMessageForm"]}
+      className={`${styles["CreateMessageForm"]} wrapper`}
       data-testid="component-CreateMessageForm"
     >
-      loading: {String(loading)}
+      <Typography.Title className={styles["title"]}>
+        Enter your secret message below
+      </Typography.Title>
+      <Typography.Paragraph className={styles["subtitle"]}>
+        You can enter a password, secret message or anything that needs to be
+        secure
+      </Typography.Paragraph>
       <Form layout="vertical" onFinish={finishHandler}>
         <Form.Item
           name="message"
@@ -67,6 +73,16 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = () => {
           </Button>
         </Form.Item>
       </Form>
+      <Typography.Paragraph className={styles["footnote"]}>
+        The secret link will work only once. After that, your message is deleted
+        forever.
+      </Typography.Paragraph>
+      <Typography.Paragraph
+        className={`${styles["footnote"]} ${styles["narrow"]}`}
+      >
+        Sign up to track messages created by you and whether they have already
+        been opened or not.
+      </Typography.Paragraph>
     </div>
   );
 };

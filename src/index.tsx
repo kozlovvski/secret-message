@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import fixVH from "./util/fixVH";
+import fixVH from "util/fixVH";
+import "scss/global.scss";
 
 ReactDOM.render(
   <React.StrictMode>

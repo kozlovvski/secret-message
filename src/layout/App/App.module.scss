@@ -9,10 +9,10 @@
   min-height: calc(var(--vh, 1vh) * 100);
   background: repeating-linear-gradient(
     45deg,
-    $primary--lighter,
-    $primary--lighter 50%,
-    $primary--light 50%,
-    $primary--light
+    $background--light,
+    $background--light 50%,
+    $background 50%,
+    $background
   );
   background-size: 20px 20px;
 
@@ -24,5 +24,7 @@
     width: 100%;
     padding: 20px;
     min-height: calc(var(--vh, 1vh) * 100);
+
+    color: #fff;
   }
 }

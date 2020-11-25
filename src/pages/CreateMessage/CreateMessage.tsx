@@ -1,9 +1,8 @@
 // templates/page/Page.tsx
-import { Typography } from "antd";
+import CreateMessageForm from "features/add-new-message/components/CreateMessageForm/CreateMessageForm";
 import React from "react";
 import { RouteChildrenProps } from "react-router-dom";
 
-import CreateMessageForm from "features/add-new-message/components/CreateMessageForm/CreateMessageForm";
 import styles from "./CreateMessage.module.scss";
 
 interface ICreateMessagePageProps extends RouteChildrenProps {
@@ -36,11 +35,6 @@ const CreateMessagePage: React.FC<ICreateMessagePageProps> = ({
 }) => {
   return (
     <div className={styles["CreateMessage"]} data-testid="page-CreateMessage">
-      <Typography.Title>Enter your secret message below</Typography.Title>
-      <Typography.Paragraph>
-        You can enter a password, secret message or anything that needs to be
-        secure
-      </Typography.Paragraph>
       <CreateMessageForm />
     </div>
   );
