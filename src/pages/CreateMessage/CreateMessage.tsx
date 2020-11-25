@@ -1,8 +1,10 @@
 // templates/page/Page.tsx
 import CreateMessageConfirm from "features/add-new-message/components/CreateMessageConfirm/CreateMessageConfirm";
 import CreateMessageForm from "features/add-new-message/components/CreateMessageForm/CreateMessageForm";
+import { clearMessage } from "features/add-new-message/new-message.slice";
+import useAppDispatch from "hooks/useAppDispatch";
 import useAppSelector from "hooks/useAppSelector";
-import React from "react";
+import React, { useEffect } from "react";
 import { RouteChildrenProps } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import cssTransitionClasses from "test/cssTransitionClasses";
@@ -34,6 +36,13 @@ interface ICreateMessagePageProps extends RouteChildrenProps {
 
 const CreateMessagePage: React.FC<ICreateMessagePageProps> = () => {
   const { success } = useAppSelector((state) => state.newMessage);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearMessage);
+    };
+  }, []);
 
   return (
     <div className={styles["CreateMessage"]} data-testid="page-CreateMessage">
