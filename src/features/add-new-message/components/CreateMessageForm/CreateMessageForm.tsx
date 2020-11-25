@@ -16,7 +16,7 @@ export interface ICreateMessageFormProps {
 }
 
 /**
- * A component that accepts a
+ * A component that handles new message creation
  *
  * @return the CreateMessageForm component
  */
