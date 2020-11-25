@@ -2,6 +2,7 @@
 import { Button, Form, Input, Typography } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
+import { EditOutlined } from "@ant-design/icons";
 
 import useAppDispatch from "hooks/useAppDispatch";
 import { CreateSMessagePayload } from "typings/secret-message";
@@ -65,6 +66,7 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = () => {
             loading={loading}
             type="primary"
             block
+            icon={<EditOutlined />}
             htmlType="submit"
             data-testid="submit-button"
           >
