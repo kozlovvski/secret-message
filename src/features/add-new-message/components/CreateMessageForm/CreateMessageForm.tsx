@@ -11,6 +11,7 @@ import styles from "./CreateMessageForm.module.scss";
 
 export interface ICreateMessageFormProps {
   children?: never;
+  className?: string;
 }
 
 /**
@@ -19,17 +20,19 @@ export interface ICreateMessageFormProps {
  * @return the CreateMessageForm component
  */
 
-const CreateMessageForm: React.FC<ICreateMessageFormProps> = () => {
-  const { success, loading } = useAppSelector((state) => state.newMessage);
+const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
+  className = "",
+}) => {
+  const { loading } = useAppSelector((state) => state.newMessage);
   const dispatch = useAppDispatch();
 
   const finishHandler = (values: CreateSMessagePayload) => {
     dispatch(createMessage(values));
   };
 
-  return success ? null : (
+  return (
     <div
-      className={`${styles["CreateMessageForm"]} wrapper`}
+      className={`${styles["CreateMessageForm"]} ${className} wrapper`}
       data-testid="component-CreateMessageForm"
     >
       <Typography.Title className={styles["title"]}>
