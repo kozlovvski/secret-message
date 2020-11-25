@@ -1,23 +1,16 @@
-import { GenericSMessage } from "typings/secret-message";
-import configureMockStore from "redux-mock-store";
-import thunk, {
-  ThunkAction,
-  ThunkDispatch,
-  ThunkMiddleware,
-} from "redux-thunk";
-import firebase from "firebase-instance";
 import "firebase/firestore";
+
+import firebase from "firebase-instance";
+import { mockStore } from "test/testUtils";
+import { GenericSMessage } from "typings/secret-message";
+
 import newMessage, {
-  createMessageRequest,
-  createMessageSuccess,
-  createMessageError,
   clearMessage,
   createMessage,
+  createMessageError,
+  createMessageRequest,
+  createMessageSuccess,
 } from "./new-message.slice";
-import { AppDispatch, AppThunk, RootState } from "typings/store";
-import { AnyAction } from "redux";
-
-const mockStore = configureMockStore<RootState, AppDispatch>([thunk]);
 
 describe("new message reducer", () => {
   it("should have a correct initial state", () => {

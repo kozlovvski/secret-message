@@ -1,13 +1,12 @@
 // templates/component/Component.tsx
-import { Button, Form, Input, Typography } from "antd";
-import React from "react";
-import { useSelector } from "react-redux";
 import { EditOutlined } from "@ant-design/icons";
-
-import useAppDispatch from "hooks/useAppDispatch";
-import { CreateSMessagePayload } from "typings/secret-message";
-import { RootState } from "typings/store";
+import { Button, Form, Input, Typography } from "antd";
 import { createMessage } from "features/add-new-message/new-message.slice";
+import useAppDispatch from "hooks/useAppDispatch";
+import useAppSelector from "hooks/useAppSelector";
+import React from "react";
+import { CreateSMessagePayload } from "typings/secret-message";
+
 import styles from "./CreateMessageForm.module.scss";
 
 export interface ICreateMessageFormProps {
@@ -21,9 +20,7 @@ export interface ICreateMessageFormProps {
  */
 
 const CreateMessageForm: React.FC<ICreateMessageFormProps> = () => {
-  const { success, loading } = useSelector(
-    (state: RootState) => state.newMessage
-  );
+  const { success, loading } = useAppSelector((state) => state.newMessage);
   const dispatch = useAppDispatch();
 
   const finishHandler = (values: CreateSMessagePayload) => {
