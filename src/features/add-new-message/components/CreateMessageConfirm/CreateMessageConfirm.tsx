@@ -1,5 +1,5 @@
 // templates/component/Component.tsx
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, SelectOutlined } from "@ant-design/icons";
 import {
   Button,
   Input,
@@ -11,6 +11,7 @@ import { clearMessage } from "features/add-new-message/new-message.slice";
 import useAppDispatch from "hooks/useAppDispatch";
 import useAppSelector from "hooks/useAppSelector";
 import React, { MouseEvent } from "react";
+import { Link } from "react-router-dom";
 
 import featureStyles from "../../common.module.scss";
 import styles from "./CreateMessageConfirm.module.scss";
@@ -45,6 +46,8 @@ const CreateMessageConfirm: React.FC<ICreateMessageConfirmProps> = ({
     antdMessage.success("Link copied do clipboard!");
   };
 
+  const messageLink = `/message/${message?.id}`;
+
   return (
     <div
       className={`${styles["CreateMessageConfirm"]} ${className} wrapper`}
@@ -62,23 +65,38 @@ const CreateMessageConfirm: React.FC<ICreateMessageConfirmProps> = ({
       >
         Your message was created. Copy the link below and share it!
       </Typography.Paragraph>
-      <Tooltip title="Click the link to copy it to clipboard!">
+      <Tooltip
+        placement="bottom"
+        title="Click the link to copy it to clipboard!"
+      >
         <Input
           onClick={inputClickHandler}
-          disabled
-          value={`${window.location.host}/message/${message?.id}`}
+          value={`${window.location.host}${messageLink}`}
           data-testid="message-link"
         />
       </Tooltip>
-      <Button
-        onClick={anotherMessageHandler}
-        type="primary"
-        block
-        icon={<PlusOutlined />}
-        data-testid="create-another-button"
-      >
-        Create another message
-      </Button>
+      <div className={styles["buttons-flex"]}>
+        <Link to={messageLink}>
+          <Button
+            className={styles["view-button"]}
+            icon={<SelectOutlined />}
+            ghost
+            block
+          >
+            View your message
+          </Button>
+        </Link>
+        <Button
+          onClick={anotherMessageHandler}
+          className={styles["create-button"]}
+          type="primary"
+          block
+          icon={<PlusOutlined />}
+          data-testid="create-another-button"
+        >
+          Create another message
+        </Button>
+      </div>
       <Typography.Paragraph className={featureStyles["footnote"]}>
         Sign up to track messages created by you and whether they have already
         been opened or not.
