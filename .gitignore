@@ -25,3 +25,6 @@ yarn-error.log*
 
 # Firebase config
 secret-message-eb337*.json
+
+# eslint cache
+.eslintcache
