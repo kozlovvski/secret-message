@@ -8,6 +8,7 @@ import React from "react";
 import { CreateSMessagePayload } from "typings/secret-message";
 
 import styles from "./CreateMessageForm.module.scss";
+import featureStyles from "features/add-new-message/common.module.scss";
 
 export interface ICreateMessageFormProps {
   children?: never;
@@ -32,13 +33,13 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
 
   return (
     <div
-      className={`${styles["CreateMessageForm"]} ${className} wrapper`}
+      className={`${featureStyles["CreateMessageForm"]} ${className} wrapper`}
       data-testid="component-CreateMessageForm"
     >
-      <Typography.Title className={styles["title"]}>
+      <Typography.Title className={featureStyles["title"]}>
         Enter your secret message below
       </Typography.Title>
-      <Typography.Paragraph className={styles["subtitle"]}>
+      <Typography.Paragraph className={featureStyles["subtitle"]}>
         You can enter a password, secret message or anything that needs to be
         secure
       </Typography.Paragraph>
@@ -74,12 +75,12 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
           </Button>
         </Form.Item>
       </Form>
-      <Typography.Paragraph className={styles["footnote"]}>
+      <Typography.Paragraph className={featureStyles["footnote"]}>
         The secret link will work only once. After that, your message is deleted
         forever.
       </Typography.Paragraph>
       <Typography.Paragraph
-        className={`${styles["footnote"]} ${styles["narrow"]}`}
+        className={`${featureStyles["footnote"]} ${styles["narrow"]}`}
       >
         Sign up to track messages created by you and whether they have already
         been opened or not.
