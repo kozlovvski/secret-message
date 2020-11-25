@@ -42,7 +42,7 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = () => {
         You can enter a password, secret message or anything that needs to be
         secure
       </Typography.Paragraph>
-      <Form layout="vertical" onFinish={finishHandler}>
+      <Form layout="vertical" onFinish={finishHandler} data-testid="form">
         <Form.Item
           name="message"
           rules={[
