@@ -5,3 +5,23 @@
 .CreateMessage {
   align-self: center;
 }
+
+.form-animation {
+  transform: translateX(0);
+  transition: transform 300ms ease-in;
+
+  &-enter {
+    &-active {
+      transform: translateX(0);
+    }
+  }
+
+  &-exit {
+    &-active {
+      transform: translateX(-100vw);
+    }
+    &-done {
+      transform: translateX(-100vw);
+    }
+  }
+}

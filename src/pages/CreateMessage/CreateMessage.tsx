@@ -1,7 +1,10 @@
 // templates/page/Page.tsx
 import CreateMessageForm from "features/add-new-message/components/CreateMessageForm/CreateMessageForm";
+import useAppSelector from "hooks/useAppSelector";
 import React from "react";
 import { RouteChildrenProps } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
+import cssTransitionClasses from "test/cssTransitionClasses";
 
 import styles from "./CreateMessage.module.scss";
 
@@ -33,9 +36,17 @@ const CreateMessagePage: React.FC<ICreateMessagePageProps> = ({
   location,
   match,
 }) => {
+  const { success } = useAppSelector((state) => state.newMessage);
+
   return (
     <div className={styles["CreateMessage"]} data-testid="page-CreateMessage">
-      <CreateMessageForm />
+      <CSSTransition
+        in={!success}
+        timeout={300}
+        classNames={cssTransitionClasses(styles, "form-animation")}
+      >
+        <CreateMessageForm className={styles["form-animation"]} />
+      </CSSTransition>
     </div>
   );
 };
