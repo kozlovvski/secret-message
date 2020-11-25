@@ -3,25 +3,30 @@
 @import "src/scss/variables", "src/scss/mixins";
 
 .CreateMessage {
+  width: 100%;
+  overflow: hidden;
   align-self: center;
 }
 
-.form-animation {
+.slider {
+  display: flex;
+  width: 200%;
+
   transform: translateX(0);
-  transition: transform 300ms ease-in;
+  transition: transform 500ms ease;
 
   &-enter {
     &-active {
-      transform: translateX(0);
+      transform: translateX(-50%);
+    }
+    &-done {
+      transform: translateX(-50%);
     }
   }
 
   &-exit {
     &-active {
-      transform: translateX(-100vw);
-    }
-    &-done {
-      transform: translateX(-100vw);
+      transform: translateX(0);
     }
   }
 }

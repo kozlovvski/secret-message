@@ -1,4 +1,5 @@
 // templates/page/Page.tsx
+import CreateMessageConfirm from "features/add-new-message/components/CreateMessageConfirm/CreateMessageConfirm";
 import CreateMessageForm from "features/add-new-message/components/CreateMessageForm/CreateMessageForm";
 import useAppSelector from "hooks/useAppSelector";
 import React from "react";
@@ -31,21 +32,20 @@ interface ICreateMessagePageProps extends RouteChildrenProps {
  * @return the CreateMessage page component
  */
 
-const CreateMessagePage: React.FC<ICreateMessagePageProps> = ({
-  history,
-  location,
-  match,
-}) => {
+const CreateMessagePage: React.FC<ICreateMessagePageProps> = () => {
   const { success } = useAppSelector((state) => state.newMessage);
 
   return (
     <div className={styles["CreateMessage"]} data-testid="page-CreateMessage">
       <CSSTransition
-        in={!success}
-        timeout={300}
-        classNames={cssTransitionClasses(styles, "form-animation")}
+        in={success}
+        timeout={500}
+        classNames={cssTransitionClasses(styles, "slider")}
       >
-        <CreateMessageForm className={styles["form-animation"]} />
+        <div className={styles["slider"]}>
+          <CreateMessageForm />
+          <CreateMessageConfirm />
+        </div>
       </CSSTransition>
     </div>
   );
