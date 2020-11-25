@@ -1,4 +1,10 @@
 import { GenericSMessage } from "typings/secret-message";
+import configureMockStore from "redux-mock-store";
+import thunk, {
+  ThunkAction,
+  ThunkDispatch,
+  ThunkMiddleware,
+} from "redux-thunk";
 import firebase from "firebase-instance";
 import "firebase/firestore";
 import newMessage, {
@@ -8,11 +14,10 @@ import newMessage, {
   clearMessage,
   createMessage,
 } from "./new-message.slice";
+import { AppDispatch, AppThunk, RootState } from "typings/store";
+import { AnyAction } from "redux";
 
-// const createMessageCloud = jest.fn();
-// jest.mock("./new-message.slice", () => ({
-//   createMessageCloud: jest.fn(() => Promise.resolve({ id: "1" })),
-// }));
+const mockStore = configureMockStore<RootState, AppDispatch>([thunk]);
 
 describe("new message reducer", () => {
   it("should have a correct initial state", () => {
@@ -76,39 +81,41 @@ describe("new message reducer", () => {
   });
 
   describe("createMessage thunk", () => {
-    const dispatch = jest.fn();
-    const getState = jest.fn();
+    it("should dispatch expected actions on successful request", async () => {
+      const store = mockStore({
+        newMessage: {
+          success: false,
+          loading: false,
+        },
+      });
+      const expectedActions = [
+        createMessageRequest.type,
+        createMessageSuccess.type,
+      ];
 
-    it("should dispatch a createMessageRequest action", async () => {
-      createMessage({ message: "test message" })(dispatch, getState, undefined);
-      expect(dispatch).toHaveBeenCalledWith(createMessageRequest());
+      await store.dispatch(createMessage({ message: "test" }));
+
+      const actualActions = store.getActions().map((action) => action.type);
+      expect(actualActions).toEqual(expectedActions);
     });
 
-    // TODO: find a way to test thunks, check why dispatch is called only once
-    // describe("when request succeeds", () => {
-    //   beforeEach(() => {
-    //     createMessageCloud.mockResolvedValue({
-    //       id: "3",
-    //       createdAt: new firebase.firestore.Timestamp(500, 30),
-    //       alreadyViewed: false,
-    //     });
-    //   });
+    it("should dispatch expected actions on rejected request", async () => {
+      const store = mockStore({
+        newMessage: {
+          success: false,
+          loading: false,
+        },
+      });
+      const expectedActions = [
+        createMessageRequest.type,
+        createMessageError.type,
+      ];
 
-    //   it("should dispatch a createMessageSuccess", () => {
-    //     createMessage({ message: "createMessageSuccess test" })(
-    //       dispatch,
-    //       getState,
-    //       undefined
-    //     );
-    //     console.log(dispatch.mock.calls)
-    //     expect(dispatch).toHaveBeenLastCalledWith(
-    //       createMessageSuccess({
-    //         id: "3",
-    //         createdAt: new firebase.firestore.Timestamp(500, 30),
-    //         alreadyViewed: false,
-    //       })
-    //     );
-    //   });
-    // });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await store.dispatch(createMessage({ message: 3 } as any));
+
+      const actualActions = store.getActions().map((action) => action.type);
+      expect(actualActions).toEqual(expectedActions);
+    });
   });
 });
