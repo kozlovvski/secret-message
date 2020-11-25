@@ -1,6 +1,5 @@
 import { ReactWrapper, ShallowWrapper } from "enzyme";
 import { createLocation, createMemoryHistory } from "history";
-import { RootStateOrAny } from "react-redux";
 import { match, RouteChildrenProps } from "react-router-dom";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
