@@ -3,7 +3,9 @@
 import React from "react";
 import styles from "./CreateMessageConfirm.module.scss";
 
-export interface ICreateMessageConfirmProps {}
+export interface ICreateMessageConfirmProps {
+  children?: never;
+}
 
 /**
  * A component that <EDIT THIS>

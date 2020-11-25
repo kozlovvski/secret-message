@@ -1,7 +1,10 @@
+import { Form } from "antd";
 import { shallow } from "enzyme";
 import React from "react";
-import { findByTestAttr } from "test/testUtils";
 
+import { findByTestAttr } from "test/testUtils";
+import { CreateSMessagePayload } from "typings/secret-message";
+import firebase from "firebase-instance";
 import CreateMessageConfirm, {
   ICreateMessageConfirmProps,
 } from "./CreateMessageConfirm";
@@ -14,6 +17,10 @@ jest.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
 }));
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const clearMessage: jest.Mock = require("features/add-new-message/new-message.slice")
+  .clearMessage;
+
 const defaultProps: ICreateMessageConfirmProps = {};
 
 describe("<CreateMessageConfirm />", () => {
@@ -23,7 +30,15 @@ describe("<CreateMessageConfirm />", () => {
   let wrapper: ReturnType<typeof setup>;
 
   beforeEach(() => {
-    useSelector.mockReturnValue({ success: false, loading: false });
+    useSelector.mockReturnValue({
+      success: true,
+      loading: false,
+      message: {
+        id: "123-test",
+        createdAt: new firebase.firestore.Timestamp(1000, 0),
+        alreadyViewed: false,
+      },
+    });
     mockDispatch.mockReturnValue(jest.fn());
     wrapper = setup();
   });
@@ -35,5 +50,38 @@ describe("<CreateMessageConfirm />", () => {
   test("should render without an error", () => {
     const component = findByTestAttr(wrapper, "component-CreateMessageConfirm");
     expect(component.length).toBe(1);
+  });
+
+  test("should render a congrats-title", () => {
+    const component = findByTestAttr(wrapper, "congrats-title");
+    expect(component.length).toBe(1);
+  });
+
+  test("should render a congrats-subtitle", () => {
+    const component = findByTestAttr(wrapper, "congrats-subtitle");
+    expect(component.length).toBe(1);
+  });
+
+  test("should render a message link", () => {
+    const component = findByTestAttr(wrapper, "message-link");
+    expect(component.length).toBe(1);
+  });
+
+  test("should render a correct message link", () => {
+    const component = findByTestAttr(wrapper, "message-link");
+    expect(
+      component.text().includes(window.location.host + "/app/123-test")
+    ).toBe(true);
+  });
+
+  test("should render a create another message button", () => {
+    const component = findByTestAttr(wrapper, "create-another-button");
+    expect(component.length).toBe(1);
+  });
+
+  test("should dispatch a correct action on button click", () => {
+    const button = findByTestAttr(wrapper, "create-another-button");
+    button.simulate("click");
+    expect(mockDispatch).toBeCalledWith(clearMessage());
   });
 });
