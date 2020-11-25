@@ -9,6 +9,7 @@ import { CreateSMessagePayload } from "typings/secret-message";
 
 import styles from "./CreateMessageForm.module.scss";
 import featureStyles from "../../common.module.scss";
+import { useForm } from "antd/lib/form/Form";
 
 export interface ICreateMessageFormProps {
   children?: never;
@@ -26,8 +27,10 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
 }) => {
   const { loading } = useAppSelector((state) => state.newMessage);
   const dispatch = useAppDispatch();
+  const [form] = useForm();
 
   const finishHandler = (values: CreateSMessagePayload) => {
+    form.resetFields();
     dispatch(createMessage(values));
   };
 
@@ -43,7 +46,12 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
         You can enter a password, secret message or anything that needs to be
         secure
       </Typography.Paragraph>
-      <Form layout="vertical" onFinish={finishHandler} data-testid="form">
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={finishHandler}
+        data-testid="form"
+      >
         <Form.Item
           name="message"
           rules={[

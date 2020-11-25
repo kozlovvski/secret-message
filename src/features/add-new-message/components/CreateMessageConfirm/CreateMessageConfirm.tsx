@@ -10,7 +10,7 @@ import {
 import { clearMessage } from "features/add-new-message/new-message.slice";
 import useAppDispatch from "hooks/useAppDispatch";
 import useAppSelector from "hooks/useAppSelector";
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import featureStyles from "../../common.module.scss";
@@ -30,8 +30,15 @@ export interface ICreateMessageConfirmProps {
 const CreateMessageConfirm: React.FC<ICreateMessageConfirmProps> = ({
   className = "",
 }) => {
-  const { message } = useAppSelector((state) => state.newMessage);
   const dispatch = useAppDispatch();
+  const { message } = useAppSelector((state) => state.newMessage);
+
+  // persist messageLink after `message` is deleted from redux store
+  // to display link correctly in input
+  const [messageLink, setMessageLink] = useState("");
+  useEffect(() => {
+    message && setMessageLink(`/message/${message.id}`);
+  }, [message]);
 
   const anotherMessageHandler = () => {
     dispatch(clearMessage());
@@ -45,8 +52,6 @@ const CreateMessageConfirm: React.FC<ICreateMessageConfirmProps> = ({
     document.execCommand("copy");
     antdMessage.success("Link copied do clipboard!");
   };
-
-  const messageLink = `/message/${message?.id}`;
 
   return (
     <div
