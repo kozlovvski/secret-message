@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
     "@reduxjs/toolkit": "^1.4.0",
     "@types/webpack-env": "^1.16.0",
     "antd": "^4.8.4",

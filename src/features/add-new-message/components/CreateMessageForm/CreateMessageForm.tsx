@@ -44,7 +44,6 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = () => {
       <Form layout="vertical" onFinish={finishHandler}>
         <Form.Item
           name="message"
-          label="Your message"
           rules={[
             {
               required: true,
