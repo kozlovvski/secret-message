@@ -3,4 +3,11 @@
 @import "src/scss/variables", "src/scss/mixins";
 
 .CreateMessageConfirm {
+  text-align: center;
+
+  .narrow {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
