@@ -8,7 +8,7 @@ import React from "react";
 import { CreateSMessagePayload } from "typings/secret-message";
 
 import styles from "./CreateMessageForm.module.scss";
-import featureStyles from "features/add-new-message/common.module.scss";
+import featureStyles from "../../common.module.scss";
 
 export interface ICreateMessageFormProps {
   children?: never;
@@ -33,7 +33,7 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
 
   return (
     <div
-      className={`${featureStyles["CreateMessageForm"]} ${className} wrapper`}
+      className={`${styles["CreateMessageForm"]} ${className} wrapper`}
       data-testid="component-CreateMessageForm"
     >
       <Typography.Title className={featureStyles["title"]}>
