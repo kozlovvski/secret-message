@@ -1,8 +1,16 @@
 import { shallow } from "enzyme";
 import React from "react";
-
 import { findByTestAttr, mockRouteChildrenProps } from "test/testUtils";
+
 import CreateMessagePage from "./CreateMessage";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useSelector: jest.Mock = require("react-redux").useSelector;
+const mockDispatch = jest.fn();
+jest.mock("react-redux", () => ({
+  useSelector: jest.fn(),
+  useDispatch: () => mockDispatch,
+}));
 
 describe("CreateMessage page", () => {
   const renderWrapper = () =>
@@ -10,6 +18,11 @@ describe("CreateMessage page", () => {
   let wrapper: ReturnType<typeof renderWrapper>;
 
   beforeEach(() => {
+    useSelector.mockReturnValue({
+      success: false,
+      loading: false,
+    });
+    mockDispatch.mockReturnValue(jest.fn());
     wrapper = renderWrapper();
   });
 

@@ -35,7 +35,9 @@ const CreateMessageConfirm: React.FC<ICreateMessageConfirmProps> = ({
 
   // persist messageLink after `message` is deleted from redux store
   // to display link correctly in input
-  const [messageLink, setMessageLink] = useState("");
+  const [messageLink, setMessageLink] = useState(
+    `/message/${message?.id}` || ""
+  );
   useEffect(() => {
     message && setMessageLink(`/message/${message.id}`);
   }, [message]);
