@@ -1,7 +1,12 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
+import { omit } from "lodash";
+import shortid = require("shortid");
 
-import { CreateSMessagePayload } from "../../src/typings/secret-message";
+import {
+  CreateSMessagePayload,
+  GenericSMessage,
+} from "../../src/typings/secret-message";
 
 export const createMessage = functions.https.onCall(
   async ({ message }: CreateSMessagePayload, context) => {
@@ -13,17 +18,20 @@ export const createMessage = functions.https.onCall(
       );
     }
     const uid = context.auth?.uid;
-    const { id } = await admin
+    const docRef = await admin
       .firestore()
       .collection("secret-messages")
       .add({
+        id: shortid.generate(),
         message,
         uid,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        alreadyViewed: false,
       })
       .catch((err: Error) => {
         throw new functions.https.HttpsError("unknown", err.message);
       });
-    return id;
+    const docSnap = await docRef.get();
+    return omit(docSnap.data(), "message") as GenericSMessage;
   }
 );

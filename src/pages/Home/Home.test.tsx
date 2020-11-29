@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import React from "react";
 
-import { findByTestAttr, mockRouteChildrenProps } from "../../test/testUtils";
+import { findByTestAttr, mockRouteChildrenProps } from "test/testUtils";
 import HomePage from "./Home";
 
 describe("Home page", () => {

@@ -10,6 +10,3 @@ typings/
 
 # Node.js dependency directory
 node_modules/
-
-# Firebase config
-secret-message-eb337*.json

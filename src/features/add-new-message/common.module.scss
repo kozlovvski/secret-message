@@ -1,0 +1,15 @@
+@import "src/scss/variables", "src/scss/mixins";
+
+.title {
+  text-decoration: underline $primary;
+}
+
+.subtitle {
+  font-size: 1.2em;
+}
+
+.title,
+.subtitle,
+.footnote {
+  color: #fff !important;
+}
