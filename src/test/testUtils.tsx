@@ -1,9 +1,6 @@
 import { ReactWrapper, ShallowWrapper } from "enzyme";
 import { createLocation, createMemoryHistory } from "history";
 import { match, RouteChildrenProps } from "react-router-dom";
-import configureMockStore from "redux-mock-store";
-import thunk from "redux-thunk";
-import { AppDispatch, RootState } from "typings/store";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function findByTestAttr<
@@ -27,5 +24,3 @@ export function mockRouteChildrenProps({
     match,
   };
 }
-
-export const mockStore = configureMockStore<RootState, AppDispatch>([thunk]);

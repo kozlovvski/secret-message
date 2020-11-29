@@ -1,8 +1,7 @@
 // templates/page/Page.tsx
 
 import React from "react";
-import { Link, RouteChildrenProps } from "react-router-dom";
-import { Button } from "antd";
+import { RouteChildrenProps } from "react-router-dom";
 
 import styles from "./Home.module.scss";
 
@@ -33,9 +32,6 @@ const HomePage: React.FC<IHomePageProps> = ({ history, location, match }) => {
   return (
     <div className={styles["Home"]} data-testid="page-Home">
       <h1>Home page</h1>
-      <Link to="/app">
-        <Button type="primary">Create a new secret-message</Button>
-      </Link>
     </div>
   );
 };
