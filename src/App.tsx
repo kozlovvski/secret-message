@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 const App: React.FC = () => (
-  <Provider store={store}>
+  <Provider store={store()}>
     <BrowserRouter>
       <Routes />
     </BrowserRouter>

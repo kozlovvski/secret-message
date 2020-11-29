@@ -1,5 +1,4 @@
-import { GenericSMessage } from "typings/secret-message";
-import { deleteById, getMessageSnap, testEnv } from "../setupTests";
+import { getMessageRef, testEnv } from "../setupTests";
 import { createMessage } from "./createMessage";
 
 describe("createMessage", () => {
@@ -17,32 +16,25 @@ describe("createMessage", () => {
     const call = wrapped({ message: "test message" });
     expect(call).resolves.toBeTruthy();
 
-    call.then(({ id }: GenericSMessage) => {
-      deleteById(id);
+    call.then((id: string) => {
+      getMessageRef(id).delete();
     });
   });
 
-  it("should return an object when resolved", async () => {
-    const doc: GenericSMessage = await wrapped({ message: "return test" });
-    expect(typeof doc).toBe("object");
+  it("should return a string when resolved", async () => {
+    const id = await wrapped({ message: "test message" });
+    expect(typeof id).toBe("string");
 
-    deleteById(doc.id);
-  });
-
-  it("should not return a message field when resolved", async () => {
-    const doc = await wrapped({ message: "return message field test" });
-    expect(doc.message).toBe(undefined);
-
-    deleteById(doc.id);
+    getMessageRef(id).delete();
   });
 
   it("should create a new document in Firestore", async () => {
-    const doc: GenericSMessage = await wrapped({ message: "test message" });
+    const id: string = await wrapped({ message: "test message" });
 
-    const messageSnapshot = await getMessageSnap(doc.id);
+    const messageSnapshot = await getMessageRef(id).get();
     expect(messageSnapshot.exists).toBe(true);
 
-    deleteById(doc.id);
+    getMessageRef(id).delete();
   });
 });
 
