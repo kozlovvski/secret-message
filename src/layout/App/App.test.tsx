@@ -3,16 +3,16 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { findByTestAttr } from "test/testUtils";
-import DefaultLayout, { DefaultLayoutRoute } from "./Default";
+import AppLayout, { AppLayoutRoute } from "./App";
 
 const ChildComponent = () => <div data-testid="child-component" />;
 
-describe("Default layout", () => {
+describe("App layout", () => {
   const mountWrapper = () =>
     mount(
-      <DefaultLayout>
+      <AppLayout>
         <ChildComponent />
-      </DefaultLayout>
+      </AppLayout>
     );
   let wrapper: ReturnType<typeof mountWrapper>;
 
@@ -25,7 +25,7 @@ describe("Default layout", () => {
   });
 
   test("should render without an error", () => {
-    const component = findByTestAttr(wrapper, "layout-Default");
+    const component = findByTestAttr(wrapper, "layout-App");
     expect(component.length).toBe(1);
   });
 
@@ -35,13 +35,13 @@ describe("Default layout", () => {
   });
 });
 
-describe("Default layout route component", () => {
+describe("App layout route component", () => {
   const mountWrapper = () =>
     mount(
       <BrowserRouter>
-        <DefaultLayoutRoute component={ChildComponent} />
+        <AppLayoutRoute component={ChildComponent} />
       </BrowserRouter>
-    ).find(DefaultLayoutRoute);
+    ).find(AppLayoutRoute);
   let wrapper: ReturnType<typeof mountWrapper>;
 
   beforeEach(() => {
@@ -49,7 +49,7 @@ describe("Default layout route component", () => {
   });
 
   test("should render without an error", () => {
-    const component = findByTestAttr(wrapper, "layout-route-Default");
+    const component = findByTestAttr(wrapper, "layout-route-App");
     expect(component.length).toBe(1);
   });
 
@@ -58,13 +58,13 @@ describe("Default layout route component", () => {
   });
 
   test("should have a defined render method", () => {
-    const component = findByTestAttr(wrapper, "layout-route-Default");
+    const component = findByTestAttr(wrapper, "layout-route-App");
     expect(component.prop("render")).not.toBe(undefined);
   });
 
-  test("should render a Default layout component inside", () => {
-    const component = findByTestAttr(wrapper, "layout-route-Default");
-    const layoutComponent = findByTestAttr(component, "layout-Default");
+  test("should render a App layout component inside", () => {
+    const component = findByTestAttr(wrapper, "layout-route-App");
+    const layoutComponent = findByTestAttr(component, "layout-App");
     expect(layoutComponent.length).toBe(1);
   });
 });

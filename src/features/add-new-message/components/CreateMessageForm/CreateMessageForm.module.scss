@@ -1,0 +1,13 @@
+// templates/component/style.scss
+
+@import "src/scss/variables", "src/scss/mixins";
+
+.CreateMessageForm {
+  text-align: center;
+
+  .narrow {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
