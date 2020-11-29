@@ -1,7 +1,7 @@
 @import "src/scss/variables", "src/scss/mixins";
 
 .title {
-  text-decoration: underline $primary;
+  @include underline();
 }
 
 .subtitle {

@@ -1,8 +1,13 @@
 // templates/layout/Layout.tsx
+import useAppDispatch from "hooks/useAppDispatch";
+import useAppSelector from "hooks/useAppSelector";
 import React from "react";
 import { Route, RouteProps, RouteChildrenProps } from "react-router-dom";
+import { showAuthScreen, hideAuthScreen } from "features/auth/auth.slice";
 
 import styles from "./App.module.scss";
+import { CSSTransition } from "react-transition-group";
+import cssTransitionClasses from "test/cssTransitionClasses";
 
 /**
  * A layout component that wraps UI around a page. You probably want to use a `AppLayoutRoute` component inside a router and pass a page component into it
@@ -11,11 +16,44 @@ import styles from "./App.module.scss";
  */
 
 const AppLayout: React.FC = ({ children }) => {
+  const dispatch = useAppDispatch();
+  const { isLoggedIn, showScreen } = useAppSelector((state) => state.auth);
+
+  const showScreenHandler = () => {
+    dispatch(showAuthScreen());
+  };
+
+  const hideScreenHandler = () => {
+    dispatch(hideAuthScreen());
+  };
+
   return (
     <div className={styles["App"]} data-testid="layout-App">
+      <div className={styles["header"]}>
+        <h1>
+          <img src="sm-icon.svg" alt="" />
+          secret-message
+        </h1>
+        {isLoggedIn ? (
+          <span className={styles["toggle-button"]} onClick={hideScreenHandler}>
+            Sign out
+          </span>
+        ) : (
+          <span className={styles["toggle-button"]} onClick={showScreenHandler}>
+            Sign in / Sign up
+          </span>
+        )}
+      </div>
       <div className={styles["content"]} data-testid="layout-content">
         {children}
       </div>
+      <CSSTransition
+        in={showScreen}
+        timeout={500}
+        classNames={cssTransitionClasses(styles, "auth-screen")}
+      >
+        <div className={styles["auth-screen"]}>hello</div>
+      </CSSTransition>
     </div>
   );
 };
