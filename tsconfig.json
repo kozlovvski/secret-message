@@ -16,7 +16,12 @@
     "noEmit": true,
     "jsx": "react",
     "noUnusedLocals": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "baseUrl": "src",
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
   "include": ["src"]
 }
