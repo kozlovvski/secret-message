@@ -7,14 +7,7 @@
   min-height: 100vh;
 
   min-height: calc(var(--vh, 1vh) * 100);
-  background: repeating-linear-gradient(
-    45deg,
-    $background--light,
-    $background--light 50%,
-    $background 50%,
-    $background
-  );
-  background-size: 20px 20px;
+  @include triangleBackground($background--light, $background);
 
   overflow-x: hidden;
 
@@ -70,8 +63,6 @@
     position: absolute;
     top: 0;
     left: 0;
-
-    background-color: $primary;
 
     transform: translateX(100vw);
     transition: transform 500ms ease;

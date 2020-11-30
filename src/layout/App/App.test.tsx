@@ -1,9 +1,17 @@
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { findByTestAttr } from "test/testUtils";
 import AppLayout, { AppLayoutRoute } from "./App";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useSelector: jest.Mock = require("react-redux").useSelector;
+const mockDispatch = jest.fn();
+jest.mock("react-redux", () => ({
+  useSelector: jest.fn(),
+  useDispatch: () => mockDispatch,
+}));
 
 const ChildComponent = () => <div data-testid="child-component" />;
 
@@ -17,6 +25,11 @@ describe("App layout", () => {
   let wrapper: ReturnType<typeof mountWrapper>;
 
   beforeEach(() => {
+    useSelector.mockReturnValue({
+      isLoggedIn: false,
+      showScreen: false,
+    });
+    mockDispatch.mockReturnValue(jest.fn());
     wrapper = mountWrapper();
   });
 
@@ -35,6 +48,64 @@ describe("App layout", () => {
   });
 });
 
+describe("App layout components", () => {
+  const setup = () =>
+    shallow(
+      <AppLayout>
+        <ChildComponent />
+      </AppLayout>
+    );
+  let wrapper: ReturnType<typeof setup>;
+
+  beforeEach(() => {
+    useSelector.mockReturnValue({
+      isLoggedIn: false,
+      showScreen: false,
+    });
+    mockDispatch.mockReturnValue(jest.fn());
+    wrapper = setup();
+  });
+
+  test("should mount", () => {
+    expect(wrapper.length).toBe(1);
+  });
+
+  test("should render logo", () => {
+    const childMatch = findByTestAttr(wrapper, "logo");
+    expect(childMatch.length).toBe(1);
+  });
+
+  describe("if loggedIn is false", () => {
+    beforeEach(() => {
+      useSelector.mockReturnValue({
+        isLoggedIn: true,
+        showScreen: false,
+      });
+      mockDispatch.mockReturnValue(jest.fn());
+      wrapper = setup();
+    });
+    test("should render sign in / sing up button", () => {
+      const childMatch = findByTestAttr(wrapper, "sign-in-up");
+      expect(childMatch.length).toBe(1);
+    });
+  });
+
+  describe("if loggedIn is true", () => {
+    beforeEach(() => {
+      useSelector.mockReturnValue({
+        isLoggedIn: true,
+        showScreen: false,
+      });
+      mockDispatch.mockReturnValue(jest.fn());
+      wrapper = setup();
+    });
+    test("should render sign out button", () => {
+      const childMatch = findByTestAttr(wrapper, "sign-out");
+      expect(childMatch.length).toBe(1);
+    });
+  });
+});
+
 describe("App layout route component", () => {
   const mountWrapper = () =>
     mount(
@@ -45,6 +116,11 @@ describe("App layout route component", () => {
   let wrapper: ReturnType<typeof mountWrapper>;
 
   beforeEach(() => {
+    useSelector.mockReturnValue({
+      isLoggedIn: false,
+      showScreen: false,
+    });
+    mockDispatch.mockReturnValue(jest.fn());
     wrapper = mountWrapper();
   });
 

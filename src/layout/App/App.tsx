@@ -1,13 +1,15 @@
 // templates/layout/Layout.tsx
+import { Button } from "antd";
+import { showAuthScreen } from "features/auth/auth.slice";
+import AuthScreen from "features/auth/components/AuthScreen/AuthScreen";
 import useAppDispatch from "hooks/useAppDispatch";
 import useAppSelector from "hooks/useAppSelector";
 import React from "react";
-import { Route, RouteProps, RouteChildrenProps } from "react-router-dom";
-import { showAuthScreen, hideAuthScreen } from "features/auth/auth.slice";
-
-import styles from "./App.module.scss";
+import { Route, RouteChildrenProps, RouteProps } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import cssTransitionClasses from "test/cssTransitionClasses";
+
+import styles from "./App.module.scss";
 
 /**
  * A layout component that wraps UI around a page. You probably want to use a `AppLayoutRoute` component inside a router and pass a page component into it
@@ -23,27 +25,27 @@ const AppLayout: React.FC = ({ children }) => {
     dispatch(showAuthScreen());
   };
 
-  const hideScreenHandler = () => {
-    dispatch(hideAuthScreen());
-  };
-
   return (
     <div className={styles["App"]} data-testid="layout-App">
-      <div className={styles["header"]}>
+      <nav className={styles["header"]}>
         <h1>
           <img src="sm-icon.svg" alt="" />
           secret-message
         </h1>
         {isLoggedIn ? (
-          <span className={styles["toggle-button"]} onClick={hideScreenHandler}>
-            Sign out
-          </span>
-        ) : (
-          <span className={styles["toggle-button"]} onClick={showScreenHandler}>
+          <Button className={styles["toggle-button"]} ghost>
             Sign in / Sign up
-          </span>
+          </Button>
+        ) : (
+          <Button
+            className={styles["toggle-button"]}
+            ghost
+            onClick={showScreenHandler}
+          >
+            Sign in / Sign up
+          </Button>
         )}
-      </div>
+      </nav>
       <div className={styles["content"]} data-testid="layout-content">
         {children}
       </div>
@@ -52,7 +54,7 @@ const AppLayout: React.FC = ({ children }) => {
         timeout={500}
         classNames={cssTransitionClasses(styles, "auth-screen")}
       >
-        <div className={styles["auth-screen"]}>hello</div>
+        <AuthScreen className={styles["auth-screen"]} />
       </CSSTransition>
     </div>
   );

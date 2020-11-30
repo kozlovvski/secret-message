@@ -1,0 +1,19 @@
+// templates/component/style.scss
+
+@import "src/scss/variables", "src/scss/mixins";
+
+.AuthScreen {
+  position: relative;
+
+  background-color: $primary;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  color: #fff !important;
+
+  font-size: 2em;
+}
