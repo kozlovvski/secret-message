@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import { mount, shallow } from "enzyme";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -78,13 +79,14 @@ describe("App layout components", () => {
   describe("if loggedIn is false", () => {
     beforeEach(() => {
       useSelector.mockReturnValue({
-        isLoggedIn: true,
+        isLoggedIn: false,
         showScreen: false,
       });
       mockDispatch.mockReturnValue(jest.fn());
       wrapper = setup();
     });
     test("should render sign in / sing up button", () => {
+      console.log(wrapper.find(Button).prop("data-test-id"));
       const childMatch = findByTestAttr(wrapper, "sign-in-up");
       expect(childMatch.length).toBe(1);
     });

@@ -28,12 +28,16 @@ const AppLayout: React.FC = ({ children }) => {
   return (
     <div className={styles["App"]} data-testid="layout-App">
       <nav className={styles["header"]}>
-        <h1>
+        <h1 data-testid="logo">
           <img src="sm-icon.svg" alt="" />
           secret-message
         </h1>
         {isLoggedIn ? (
-          <Button className={styles["toggle-button"]} ghost>
+          <Button
+            className={styles["toggle-button"]}
+            ghost
+            data-testid="sign-out"
+          >
             Sign in / Sign up
           </Button>
         ) : (
@@ -41,6 +45,7 @@ const AppLayout: React.FC = ({ children }) => {
             className={styles["toggle-button"]}
             ghost
             onClick={showScreenHandler}
+            data-testid="sign-in-up"
           >
             Sign in / Sign up
           </Button>
