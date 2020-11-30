@@ -1,9 +1,8 @@
-import { Button } from "antd";
 import { mount, shallow } from "enzyme";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-
 import { findByTestAttr } from "test/testUtils";
+
 import AppLayout, { AppLayoutRoute } from "./App";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -86,7 +85,6 @@ describe("App layout components", () => {
       wrapper = setup();
     });
     test("should render sign in / sing up button", () => {
-      console.log(wrapper.find(Button).prop("data-test-id"));
       const childMatch = findByTestAttr(wrapper, "sign-in-up");
       expect(childMatch.length).toBe(1);
     });
