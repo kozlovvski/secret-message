@@ -21,7 +21,6 @@ jest.mock("./new-message.slice.ts", () => ({
 
 describe("new message reducer", () => {
   it("should have a correct initial state", () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect(newMessage(undefined, {} as any)).toEqual({
       loading: false,
       success: false,
@@ -29,7 +28,6 @@ describe("new message reducer", () => {
   });
 
   it("should handle createMessageRequest", () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect(newMessage(undefined, { type: createMessageRequest })).toEqual({
       loading: true,
       success: false,
@@ -116,7 +114,6 @@ describe("new message reducer", () => {
         createMessageError.type,
       ];
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await store.dispatch(createMessage({ message: 3 } as any));
 
       const actualActions = store.getActions().map((action) => action.type);
