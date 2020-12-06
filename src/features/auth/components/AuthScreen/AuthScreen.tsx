@@ -38,13 +38,22 @@ const AuthScreen: React.FC<IAuthScreenProps> = ({ className }) => {
     >
       <Row className={styles["content"]}>
         <Col span={24} sm={{ span: 7 }}>
-          <AuthScreenTitle className={styles["title"]} />
+          <AuthScreenTitle
+            data-testid="authscreen-title"
+            className={styles["title"]}
+          />
         </Col>
         <Col span={24} sm={{ span: 15, offset: 2 }}>
-          {{ signUp: <SignUpForm />, signIn: <SignInForm /> }[authScreen]}
+          {
+            {
+              signUp: <SignUpForm data-testid="signup-form" />,
+              signIn: <SignInForm data-testid="signin-form" />,
+            }[authScreen]
+          }
         </Col>
       </Row>
       <CloseOutlined
+        data-testid="close-button"
         className={styles["close-button"]}
         onClick={hideScreenHandler}
       />
