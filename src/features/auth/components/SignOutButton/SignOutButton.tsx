@@ -15,7 +15,7 @@ export interface ISignOutButtonProps {
 /**
  * A component that logs out the user
  *
- * @return the SignInButton component
+ * @return the SignOutButton component
  */
 
 const SignOutButton: React.FC<ISignOutButtonProps> = ({ className }) => {

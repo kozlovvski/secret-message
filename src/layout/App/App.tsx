@@ -1,7 +1,7 @@
 // templates/layout/Layout.tsx
 import { LoadingOutlined } from "@ant-design/icons";
 import AuthScreen from "features/auth/components/AuthScreen/AuthScreen";
-import SignInButton from "features/auth/components/SignInButton/SignInButton";
+import ShowAuthButton from "features/auth/components/ShowAuthButton/ShowAuthButton";
 import SignOutButton from "features/auth/components/SignOutButton/SignOutButton";
 import useAppSelector from "hooks/useAppSelector";
 import React from "react";
@@ -32,7 +32,7 @@ const AppLayout: React.FC = ({ children }) => {
         ) : isLoggedIn ? (
           <SignOutButton data-testid="sign-out" />
         ) : (
-          <SignInButton data-testid="sign-in-up" />
+          <ShowAuthButton data-testid="sign-in-up" />
         )}
       </nav>
       <div className={styles["content"]} data-testid="layout-content">

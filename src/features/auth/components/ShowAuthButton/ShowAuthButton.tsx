@@ -4,9 +4,9 @@ import { showAuthScreen } from "features/auth/auth.slice";
 import useAppDispatch from "hooks/useAppDispatch";
 import React from "react";
 
-import styles from "./SignInButton.module.scss";
+import styles from "./ShowAuthButton.module.scss";
 
-export interface ISignInButtonProps {
+export interface IShowAuthButtonProps {
   className?: string;
   children?: never;
 }
@@ -14,10 +14,10 @@ export interface ISignInButtonProps {
 /**
  * A component that shows the AuthScreen
  *
- * @return the SignInButton component
+ * @return the ShowAuthButton component
  */
 
-const SignInButton: React.FC<ISignInButtonProps> = ({ className }) => {
+const ShowAuthButton: React.FC<IShowAuthButtonProps> = ({ className }) => {
   const dispatch = useAppDispatch();
 
   const showScreenHandler = () => {
@@ -26,8 +26,8 @@ const SignInButton: React.FC<ISignInButtonProps> = ({ className }) => {
 
   return (
     <Button
-      className={`${styles["SignInButton"]} ${className}`}
-      data-testid="component-SignInButton"
+      className={`${styles["ShowAuthButton"]} ${className}`}
+      data-testid="component-ShowAuthButton"
       ghost
       onClick={showScreenHandler}
     >
@@ -36,4 +36,4 @@ const SignInButton: React.FC<ISignInButtonProps> = ({ className }) => {
   );
 };
 
-export default SignInButton;
+export default ShowAuthButton;

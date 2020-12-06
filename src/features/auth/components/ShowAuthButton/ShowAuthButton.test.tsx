@@ -5,13 +5,13 @@ import { mockDispatch, useSelector } from "react-redux";
 import defaultState from "store/default-state";
 
 import { findByTestAttr } from "test/testUtils";
-import SignInButton, { ISignInButtonProps } from "./SignInButton";
+import ShowAuthButton, { IShowAuthButtonProps } from "./ShowAuthButton";
 
-const defaultProps: ISignInButtonProps = {};
+const defaultProps: IShowAuthButtonProps = {};
 
-describe("<SignInButton />", () => {
+describe("<ShowAuthButton />", () => {
   const setup = (props?: Record<string, unknown>) =>
-    shallow(<SignInButton {...defaultProps} {...props} />);
+    shallow(<ShowAuthButton {...defaultProps} {...props} />);
   let wrapper: ReturnType<typeof setup>;
 
   beforeEach(() => {
@@ -24,12 +24,12 @@ describe("<SignInButton />", () => {
   });
 
   test("should render without an error", () => {
-    const component = findByTestAttr(wrapper, "component-SignInButton");
+    const component = findByTestAttr(wrapper, "component-ShowAuthButton");
     expect(component.length).toBe(1);
   });
 
   test("should dispatch a correct action on click", () => {
-    const component = findByTestAttr(wrapper, "component-SignInButton");
+    const component = findByTestAttr(wrapper, "component-ShowAuthButton");
     component.simulate("click");
     expect(mockDispatch).toBeCalledWith(showAuthScreen());
   });
