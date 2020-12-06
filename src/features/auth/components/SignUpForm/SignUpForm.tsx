@@ -15,7 +15,7 @@ export interface ISignUpFormProps {
 }
 
 /**
- * A component that <EDIT THIS>
+ * A component that handles new user creation
  *
  * @return the SignUpForm component
  */
