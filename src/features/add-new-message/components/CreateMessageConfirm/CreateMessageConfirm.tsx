@@ -112,7 +112,11 @@ const CreateMessageConfirm: React.FC<ICreateMessageConfirmProps> = ({
       </div>
       {isLoggedIn === false && (
         <Typography.Paragraph className={featureStyles["footnote"]}>
-          <span className="underline-link" onClick={showAS}>
+          <span
+            data-testid="footnote-link"
+            className="underline-link"
+            onClick={showAS}
+          >
             Sign up
           </span>{" "}
           to track messages created by you and whether they have already been
