@@ -61,6 +61,7 @@ test firebase functions:
   script:
     - cd functions
     - yarn
+    - yarn global add json
     - json -I -f service-account.json \
       -e "this.type='$TYPE'" \
       -e "this.project_id='$PROJECT_ID'" \
