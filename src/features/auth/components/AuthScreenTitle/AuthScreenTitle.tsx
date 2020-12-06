@@ -14,7 +14,7 @@ export interface IAuthScreenTitleProps {
 }
 
 /**
- * A component that <EDIT THIS>
+ * A component that handles authScreen state changing
  *
  * @return the AuthScreenTitle component
  */
@@ -33,13 +33,17 @@ const AuthScreenTitle: React.FC<IAuthScreenTitleProps> = ({
       className={`${styles["title"]} ${className}`}
     >
       <span
+        data-testid="sign-in-title"
         className={authScreen == "signIn" ? styles["active"] : ""}
         onClick={authScreenHandlerFactory("signIn")}
       >
         Sign&nbsp;in
       </span>
-      <span className={styles["title__or"]}>or</span>
+      <span data-testid="or-title" className={styles["title__or"]}>
+        or
+      </span>
       <span
+        data-testid="sign-up-title"
         className={authScreen == "signUp" ? styles["active"] : ""}
         onClick={authScreenHandlerFactory("signUp")}
       >
