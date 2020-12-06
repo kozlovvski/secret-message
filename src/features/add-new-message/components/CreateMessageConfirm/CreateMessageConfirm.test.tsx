@@ -8,18 +8,8 @@ import { findByTestAttr } from "test/testUtils";
 import CreateMessageConfirm, {
   ICreateMessageConfirmProps,
 } from "./CreateMessageConfirm";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const useSelector: jest.Mock = require("react-redux").useSelector;
-const mockDispatch = jest.fn();
-jest.mock("react-redux", () => ({
-  useSelector: jest.fn(),
-  useDispatch: () => mockDispatch,
-}));
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const clearMessage: jest.Mock = require("features/add-new-message/new-message.slice")
-  .clearMessage;
+import { mockDispatch, useSelector } from "react-redux";
+import { clearMessage } from "features/add-new-message/new-message.slice";
 
 const defaultProps: ICreateMessageConfirmProps = {};
 
@@ -30,7 +20,7 @@ describe("<CreateMessageConfirm />", () => {
   let wrapper: ReturnType<typeof setup>;
 
   beforeEach(() => {
-    useSelector.mockReturnValue({
+    (useSelector as jest.Mock).mockReturnValue({
       success: true,
       loading: false,
       message: {

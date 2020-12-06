@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import React from "react";
 
-import { findByTestAttr } from "../../test/testUtils";
+import { findByTestAttr } from "../../../../test/testUtils";
 import SignOutButton, { ISignOutButtonProps } from "./SignOutButton";
 
 const defaultProps: ISignOutButtonProps = {};

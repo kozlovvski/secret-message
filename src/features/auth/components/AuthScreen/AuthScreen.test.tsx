@@ -1,20 +1,18 @@
 import { shallow } from "enzyme";
 import React from "react";
+import { useSelector } from "react-redux";
+import defaultState from "store/default-state";
 
 import { findByTestAttr } from "test/testUtils";
 import AuthScreen, { IAuthScreenProps } from "./AuthScreen";
 
 const defaultProps: IAuthScreenProps = {};
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const useSelector: jest.Mock = require("react-redux").useSelector;
-const mockDispatch = jest.fn();
-jest.mock("react-redux", () => ({
-  useSelector: jest.fn(),
-  useDispatch: () => mockDispatch,
-}));
-
 describe("<AuthScreen />", () => {
+  beforeEach(() => {
+    (useSelector as jest.Mock).mockReturnValue(defaultState.auth);
+  });
+
   const setup = (props?: Record<string, unknown>) =>
     shallow(<AuthScreen {...defaultProps} {...props} />);
 

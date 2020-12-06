@@ -3,6 +3,7 @@ import { CreateSMessagePayload, GenericSMessage } from "typings/secret-message";
 import { AppThunk } from "typings/store";
 import firebase from "firebase-instance";
 import "firebase/functions";
+import defaultState from "store/default-state";
 
 export const createMessageCloud = firebase
   .functions()
@@ -15,10 +16,7 @@ type NewMessageState = {
   error?: string;
 };
 
-const initialState: NewMessageState = {
-  success: false,
-  loading: false,
-};
+const initialState: NewMessageState = defaultState.newMessage;
 
 const newMessageSlice = createSlice({
   name: "new-message",

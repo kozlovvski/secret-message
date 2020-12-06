@@ -28,7 +28,10 @@ const AuthScreenTitle: React.FC<IAuthScreenTitleProps> = ({
 
   const { authScreen } = useAppSelector((state) => state.auth);
   return (
-    <Title className={`${styles["title"]} ${className}`}>
+    <Title
+      data-testid="component-AuthScreenTitle"
+      className={`${styles["title"]} ${className}`}
+    >
       <span
         className={authScreen == "signIn" ? styles["active"] : ""}
         onClick={authScreenHandlerFactory("signIn")}

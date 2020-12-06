@@ -28,11 +28,11 @@ const AppLayout: React.FC = ({ children }) => {
           secret-message
         </h1>
         {isLoggedIn === undefined ? (
-          <LoadingOutlined />
+          <LoadingOutlined data-testid="spinner" />
         ) : isLoggedIn ? (
-          <SignOutButton />
+          <SignOutButton data-testid="sign-out" />
         ) : (
-          <SignInButton />
+          <SignInButton data-testid="sign-in-up" />
         )}
       </nav>
       <div className={styles["content"]} data-testid="layout-content">

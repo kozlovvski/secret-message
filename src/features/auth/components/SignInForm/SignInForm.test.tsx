@@ -1,12 +1,18 @@
 import { shallow } from "enzyme";
 import React from "react";
+import { useSelector } from "react-redux";
+import defaultState from "store/default-state";
 
-import { findByTestAttr } from "../../test/testUtils";
+import { findByTestAttr } from "../../../../test/testUtils";
 import SignInForm, { ISignInFormProps } from "./SignInForm";
 
 const defaultProps: ISignInFormProps = {};
 
 describe("<SignInForm />", () => {
+  beforeEach(() => {
+    (useSelector as jest.Mock).mockReturnValue(defaultState.auth);
+  });
+
   const setup = (props?: Record<string, unknown>) =>
     shallow(<SignInForm {...defaultProps} {...props} />);
 

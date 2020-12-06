@@ -1,12 +1,18 @@
 import { shallow } from "enzyme";
 import React from "react";
+import { useSelector } from "react-redux";
+import defaultState from "store/default-state";
 
-import { findByTestAttr } from "../../test/testUtils";
+import { findByTestAttr } from "../../../../test/testUtils";
 import AuthScreenTitle, { IAuthScreenTitleProps } from "./AuthScreenTitle";
 
 const defaultProps: IAuthScreenTitleProps = {};
 
 describe("<AuthScreenTitle />", () => {
+  beforeEach(() => {
+    (useSelector as jest.Mock).mockReturnValue(defaultState.auth);
+  });
+
   const setup = (props?: Record<string, unknown>) =>
     shallow(<AuthScreenTitle {...defaultProps} {...props} />);
 

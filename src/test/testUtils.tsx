@@ -1,8 +1,10 @@
 import { ReactWrapper, ShallowWrapper } from "enzyme";
 import { createLocation, createMemoryHistory } from "history";
+import merge from "lodash/merge";
 import { match, RouteChildrenProps } from "react-router-dom";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
+import defaultState from "store/default-state";
 import { AppDispatch, RootState } from "typings/store";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -28,4 +30,7 @@ export function mockRouteChildrenProps({
   };
 }
 
-export const mockStore = configureMockStore<RootState, AppDispatch>([thunk]);
+export const mockStore = (state: Partial<RootState>) =>
+  configureMockStore<RootState, AppDispatch>([thunk])(
+    merge(defaultState, state)
+  );

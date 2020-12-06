@@ -4,13 +4,18 @@ import firebase from "firebase-instance";
 import { mockStore } from "test/testUtils";
 import { GenericSMessage } from "typings/secret-message";
 
-import newMessage, {
+import * as newMessageModule from "./new-message.slice";
+
+const {
   clearMessage,
   createMessage,
   createMessageError,
   createMessageRequest,
   createMessageSuccess,
-} from "./new-message.slice";
+  default: newMessage,
+} = newMessageModule;
+
+jest.spyOn(newMessageModule, "createMessageCloud");
 
 describe("new message reducer", () => {
   it("should have a correct initial state", () => {
@@ -74,6 +79,11 @@ describe("new message reducer", () => {
   });
 
   describe("createMessage thunk", () => {
+    beforeEach(() => {
+      (newMessageModule.createMessageCloud as jest.Mock).mockResolvedValue({
+        data: {},
+      });
+    });
     it("should dispatch expected actions on successful request", async () => {
       const store = mockStore({
         newMessage: {

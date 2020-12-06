@@ -1,7 +1,8 @@
 import { Form } from "antd";
 import { shallow } from "enzyme";
+import { createMessage } from "features/add-new-message/new-message.slice";
 import React from "react";
-// import { useSelector } from "react-redux";
+import { mockDispatch, useSelector } from "react-redux";
 
 import { findByTestAttr } from "test/testUtils";
 import { CreateSMessagePayload } from "typings/secret-message";
@@ -9,16 +10,6 @@ import CreateMessageForm, {
   ICreateMessageFormProps,
 } from "./CreateMessageForm";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const useSelector: jest.Mock = require("react-redux").useSelector;
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const createMessage: jest.Mock = require("features/add-new-message/new-message.slice")
-  .createMessage;
-const mockDispatch = jest.fn();
-jest.mock("react-redux", () => ({
-  useSelector: jest.fn(),
-  useDispatch: () => mockDispatch,
-}));
 jest.mock("features/add-new-message/new-message.slice", () => ({
   createMessage: jest.fn(),
 }));
@@ -32,7 +23,10 @@ describe("<CreateMessageForm />", () => {
   let wrapper: ReturnType<typeof setup>;
 
   beforeEach(() => {
-    useSelector.mockReturnValue({ success: false, loading: false });
+    (useSelector as jest.Mock).mockReturnValue({
+      success: false,
+      loading: false,
+    });
     mockDispatch.mockReturnValue(jest.fn());
     wrapper = setup();
   });

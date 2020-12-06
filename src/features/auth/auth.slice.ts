@@ -5,6 +5,7 @@ import { message } from "antd";
 import firebase from "firebase-instance";
 import { AppThunk } from "typings/store";
 import { SignInPayload, SignUpPayload, ValidAuthscreen } from "typings/user";
+import defaultState from "store/default-state";
 
 type AuthState = {
   showScreen: boolean;
@@ -23,18 +24,7 @@ type AuthState = {
   };
 };
 
-const initialState: AuthState = {
-  showScreen: false,
-  authScreen: "signIn",
-  signUp: {
-    loading: false,
-    success: false,
-  },
-  signIn: {
-    loading: false,
-    success: false,
-  },
-};
+const initialState: AuthState = defaultState.auth;
 
 const newMessageSlice = createSlice({
   name: "auth",
