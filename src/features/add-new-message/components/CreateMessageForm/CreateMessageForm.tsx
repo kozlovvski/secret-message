@@ -10,6 +10,7 @@ import { CreateSMessagePayload } from "typings/secret-message";
 import styles from "./CreateMessageForm.module.scss";
 import featureStyles from "../../common.module.scss";
 import { useForm } from "antd/lib/form/Form";
+import { showAuthScreen } from "features/auth/auth.slice";
 
 export interface ICreateMessageFormProps {
   children?: never;
@@ -26,12 +27,17 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
   className = "",
 }) => {
   const { loading } = useAppSelector((state) => state.newMessage);
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [form] = useForm();
 
   const finishHandler = (values: CreateSMessagePayload) => {
     form.resetFields();
     dispatch(createMessage(values));
+  };
+
+  const showAS = () => {
+    dispatch(showAuthScreen());
   };
 
   return (
@@ -87,12 +93,17 @@ const CreateMessageForm: React.FC<ICreateMessageFormProps> = ({
         The secret link will work only once. After that, your message is deleted
         forever.
       </Typography.Paragraph>
-      <Typography.Paragraph
-        className={`${featureStyles["footnote"]} ${styles["narrow"]}`}
-      >
-        Sign up to track messages created by you and whether they have already
-        been opened or not.
-      </Typography.Paragraph>
+      {isLoggedIn === false && (
+        <Typography.Paragraph
+          className={`${featureStyles["footnote"]} ${styles["narrow"]}`}
+        >
+          <span className="underline-link" onClick={showAS}>
+            Sign up
+          </span>{" "}
+          to track messages created by you and whether they have already been
+          opened or not.
+        </Typography.Paragraph>
+      )}
     </div>
   );
 };

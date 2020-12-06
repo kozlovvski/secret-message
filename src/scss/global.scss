@@ -1,3 +1,5 @@
+@import "./variables", "./mixins";
+
 .wrapper {
   width: 100%;
   max-width: 650px;
@@ -6,5 +8,16 @@
 
   &--narrow {
     max-width: 450px;
+  }
+}
+
+.underline-link {
+  @include underline($primary);
+
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.7;
   }
 }

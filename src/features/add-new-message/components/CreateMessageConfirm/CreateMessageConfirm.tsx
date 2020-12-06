@@ -8,6 +8,7 @@ import {
   Typography,
 } from "antd";
 import { clearMessage } from "features/add-new-message/new-message.slice";
+import { showAuthScreen } from "features/auth/auth.slice";
 import useAppDispatch from "hooks/useAppDispatch";
 import useAppSelector from "hooks/useAppSelector";
 import React, { MouseEvent, useEffect, useState } from "react";
@@ -32,6 +33,7 @@ const CreateMessageConfirm: React.FC<ICreateMessageConfirmProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const { message } = useAppSelector((state) => state.newMessage);
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
 
   // persist messageLink after `message` is deleted from redux store
   // to display link correctly in input
@@ -53,6 +55,10 @@ const CreateMessageConfirm: React.FC<ICreateMessageConfirmProps> = ({
 
     document.execCommand("copy");
     antdMessage.success("Link copied do clipboard!");
+  };
+
+  const showAS = () => {
+    dispatch(showAuthScreen());
   };
 
   return (
@@ -104,10 +110,15 @@ const CreateMessageConfirm: React.FC<ICreateMessageConfirmProps> = ({
           Create another message
         </Button>
       </div>
-      <Typography.Paragraph className={featureStyles["footnote"]}>
-        Sign up to track messages created by you and whether they have already
-        been opened or not.
-      </Typography.Paragraph>
+      {isLoggedIn === false && (
+        <Typography.Paragraph className={featureStyles["footnote"]}>
+          <span className="underline-link" onClick={showAS}>
+            Sign up
+          </span>{" "}
+          to track messages created by you and whether they have already been
+          opened or not.
+        </Typography.Paragraph>
+      )}
     </div>
   );
 };
