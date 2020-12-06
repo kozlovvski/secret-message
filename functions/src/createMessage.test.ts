@@ -1,4 +1,4 @@
-import { GenericSMessage } from "typings/secret-message";
+import { GenericSMessage } from "../../src/typings/secret-message";
 import { deleteById, getMessageSnap, testEnv } from "../setupTests";
 import { createMessage } from "./createMessage";
 

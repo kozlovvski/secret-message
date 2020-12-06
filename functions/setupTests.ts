@@ -10,7 +10,7 @@ const firebaseConfig = {
 
 export const testEnv = firebaseTest(
   firebaseConfig,
-  path.resolve("secret-message-eb337-firebase-adminsdk-xa3oc-c9168c99e1.json")
+  path.resolve("service-account.json")
 );
 
 export const getMessageSnap = async (id: string) => {

@@ -6,7 +6,7 @@
 .pnp.js
 
 # testing
-/coverage
+**/coverage
 junit.xml
 
 # production
@@ -24,7 +24,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Firebase config
-secret-message-eb337-firebase-adminsdk-xa3oc-c9168c99e1.json
+service-account.json
 
 # eslint cache
 .eslintcache
