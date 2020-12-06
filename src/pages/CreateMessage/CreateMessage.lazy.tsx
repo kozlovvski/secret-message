@@ -3,7 +3,7 @@
 import React, { lazy, Suspense } from "react";
 import { RouteChildrenProps } from "react-router-dom";
 
-const CreateMessageComponent = lazy(() => import("./CreateMessage"));
+export const CreateMessageComponent = lazy(() => import("./CreateMessage"));
 
 interface ICreateMessagePageProps extends RouteChildrenProps {
   children?: never;
@@ -28,7 +28,7 @@ interface ICreateMessagePageProps extends RouteChildrenProps {
  */
 
 const LazyCreateMessagePage: React.FC<ICreateMessagePageProps> = (props) => (
-  <Suspense fallback={null}>
+  <Suspense data-testid="suspense" fallback={null}>
     <CreateMessageComponent {...props} />
   </Suspense>
 );

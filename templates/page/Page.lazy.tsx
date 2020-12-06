@@ -28,7 +28,7 @@ interface ITemplateNamePageProps extends RouteChildrenProps {
  */
 
 const LazyTemplateNamePage: React.FC<ITemplateNamePageProps> = (props) => (
-  <Suspense fallback={null}>
+  <Suspense data-testid="suspense" fallback={null}>
     <TemplateNameComponent {...props} />
   </Suspense>
 );
