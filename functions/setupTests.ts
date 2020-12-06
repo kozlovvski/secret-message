@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import * as admin from "firebase-admin";
 import * as path from "path";
 import firebaseTest = require("firebase-functions-test");

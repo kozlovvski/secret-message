@@ -7,9 +7,8 @@ import thunk from "redux-thunk";
 import defaultState from "store/default-state";
 import { AppDispatch, RootState } from "typings/store";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export function findByTestAttr<
-  O extends ShallowWrapper<any> | ReactWrapper<any>
+  O extends ShallowWrapper<unknown> | ReactWrapper<unknown>
 >(wrapper: O, val: string): ShallowWrapper | ReactWrapper {
   return wrapper.find(`[data-testid="${val}"]`);
 }
