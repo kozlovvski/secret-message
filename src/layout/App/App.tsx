@@ -7,7 +7,7 @@ import useAppSelector from "hooks/useAppSelector";
 import React from "react";
 import { Route, RouteChildrenProps, RouteProps } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import cssTransitionClasses from "test/cssTransitionClasses";
+import cssTransitionClasses from "util/cssTransitionClasses";
 
 import styles from "./App.module.scss";
 
