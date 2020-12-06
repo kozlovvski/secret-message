@@ -1,5 +1,10 @@
 .wrapper {
+  width: 100%;
   max-width: 650px;
   padding: 20px;
   margin: 0 auto;
+
+  &--narrow {
+    max-width: 450px;
+  }
 }

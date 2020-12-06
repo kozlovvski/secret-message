@@ -1,7 +1,7 @@
 @import "./variables";
 
-@mixin underline() {
-  text-decoration: underline $primary;
+@mixin underline($color: $primary) {
+  text-decoration: underline $color;
 }
 
 @mixin triangleBackground($color1, $color2) {

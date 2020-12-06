@@ -1,8 +1,8 @@
 // templates/layout/Layout.tsx
-import { Button } from "antd";
-import { showAuthScreen } from "features/auth/auth.slice";
+import { LoadingOutlined } from "@ant-design/icons";
 import AuthScreen from "features/auth/components/AuthScreen/AuthScreen";
-import useAppDispatch from "hooks/useAppDispatch";
+import SignInButton from "features/auth/components/SignInButton/SignInButton";
+import SignOutButton from "features/auth/components/SignOutButton/SignOutButton";
 import useAppSelector from "hooks/useAppSelector";
 import React from "react";
 import { Route, RouteChildrenProps, RouteProps } from "react-router-dom";
@@ -18,12 +18,7 @@ import styles from "./App.module.scss";
  */
 
 const AppLayout: React.FC = ({ children }) => {
-  const dispatch = useAppDispatch();
   const { isLoggedIn, showScreen } = useAppSelector((state) => state.auth);
-
-  const showScreenHandler = () => {
-    dispatch(showAuthScreen());
-  };
 
   return (
     <div className={styles["App"]} data-testid="layout-App">
@@ -32,23 +27,12 @@ const AppLayout: React.FC = ({ children }) => {
           <img src="sm-icon.svg" alt="" />
           secret-message
         </h1>
-        {isLoggedIn ? (
-          <Button
-            className={styles["toggle-button"]}
-            ghost
-            data-testid="sign-out"
-          >
-            Sign in / Sign up
-          </Button>
+        {isLoggedIn === undefined ? (
+          <LoadingOutlined />
+        ) : isLoggedIn ? (
+          <SignOutButton />
         ) : (
-          <Button
-            className={styles["toggle-button"]}
-            ghost
-            onClick={showScreenHandler}
-            data-testid="sign-in-up"
-          >
-            Sign in / Sign up
-          </Button>
+          <SignInButton />
         )}
       </nav>
       <div className={styles["content"]} data-testid="layout-content">

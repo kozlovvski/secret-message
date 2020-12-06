@@ -3,9 +3,49 @@
 @import "src/scss/variables", "src/scss/mixins";
 
 .AuthScreen {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 100px 0;
+
   position: relative;
 
-  background-color: $primary;
+  background: linear-gradient(
+      135deg,
+      $primary--lighter,
+      rgba($primary--light, 0)
+    ),
+    repeating-linear-gradient(
+      45deg,
+      $primary--lighter,
+      $primary--lighter 50%,
+      $primary--light 50%,
+      $primary--light
+    );
+  background-size: cover, 20px 20px;
+
+  @media screen and (min-width: 768px) {
+    align-items: center;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 660px;
+    min-height: 440px;
+    padding: 20px;
+
+    @media screen and (max-width: 575px) {
+      flex-direction: column;
+    }
+  }
+
+  .title {
+    @media screen and (min-width: 576px) {
+      span {
+        display: block;
+      }
+    }
+  }
 }
 
 .close-button {
@@ -13,7 +53,7 @@
   top: 20px;
   left: 20px;
 
-  color: #fff !important;
+  color: $secondary !important;
 
   font-size: 2em;
 }

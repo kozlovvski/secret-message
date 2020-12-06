@@ -4,13 +4,20 @@ import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes";
 import { Provider } from "react-redux";
 import store from "./store";
+import useAuthStateChanged from "features/auth/hooks/useAuthStateChanged";
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+  useAuthStateChanged();
+
+  return <Routes />;
+};
+
+const WrappedApp: React.FC = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <Routes />
+      <App />
     </BrowserRouter>
   </Provider>
 );
 
-export default App;
+export default WrappedApp;

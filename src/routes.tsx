@@ -9,7 +9,7 @@ import HomePage from "./pages/Home/Home";
 const Routes: React.FC = () => (
   <Switch>
     <DefaultLayoutRoute exact path="/" component={HomePage} />
-    <AppLayoutRoute exact path="/app" component={CreateMessagePage} />
+    <AppLayoutRoute exact path="/new" component={CreateMessagePage} />
     <Redirect to="/" />
   </Switch>
 );

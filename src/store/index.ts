@@ -1,9 +1,19 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
 import rootReducer from "./root-reducer";
 
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: ["auth/logInUser"],
+      ignoredPaths: ["firebase", "firestore"],
+    },
+  }),
+];
+
 const store = configureStore({
   reducer: rootReducer,
+  middleware,
 });
 
 if (process.env.NODE_ENV === "development" && module.hot) {

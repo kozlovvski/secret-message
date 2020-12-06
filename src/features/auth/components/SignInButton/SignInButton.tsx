@@ -1,9 +1,9 @@
 // templates/component/Component.tsx
-
 import { Button } from "antd";
-import { hideAuthScreen, showAuthScreen } from "features/auth/auth.slice";
+import { showAuthScreen } from "features/auth/auth.slice";
 import useAppDispatch from "hooks/useAppDispatch";
 import React from "react";
+
 import styles from "./SignInButton.module.scss";
 
 export interface ISignInButtonProps {
