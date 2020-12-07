@@ -50,27 +50,3 @@ test coverage:
     policy: pull
     paths:
       - "node_modules"
-
-test firebase functions:
-  image: node:12
-  stage: test
-  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-  artifacts:
-    reports:
-      junit: functions/junit.xml
-  script:
-    - cd functions
-    - yarn
-    - yarn global add json
-    - json -f service-account.json \
-      -e "this.type='$TYPE'" \
-      -e "this.project_id='$PROJECT_ID'" \
-      -e "this.private_key_id='$PRIVATE_KEY_ID'" \
-      -e "this.private_key='$PRIVATE_KEY'" \
-      -e "this.client_email='$CLIENT_EMAIL'" \
-      -e "this.client_id='$CLIENT_ID'" \
-      -e "this.auth_uri='$AUTH_URI'" \
-      -e "this.token_uri='$TOKEN_URI'" \
-      -e "this.auth_provider_x509_cert_url='$AUTH_CERT'" \
-      -e "this.client_x509_cert_url='$CLIENT_CERT'" \
-    - yarn test --colors --coverage --reporters=default --reporters=jest-junit
