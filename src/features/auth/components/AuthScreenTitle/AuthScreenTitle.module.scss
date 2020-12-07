@@ -1,0 +1,38 @@
+// templates/component/style.scss
+
+@import "src/scss/variables", "src/scss/mixins";
+
+.title {
+  margin: 0 auto;
+
+  color: $primary;
+
+  text-align: center;
+
+  &__or {
+    display: inline-block;
+    font-size: 0.7em;
+    font-weight: normal;
+    margin: 0 1em;
+
+    opacity: 0.5;
+  }
+
+  span:not(.title__or) {
+    opacity: 0.5;
+    color: $secondary !important;
+
+    text-decoration: underline $primary;
+
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}

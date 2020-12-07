@@ -1,0 +1,16 @@
+@import "./variables";
+
+@mixin underline($color: $primary) {
+  text-decoration: underline $color;
+}
+
+@mixin triangleBackground($color1, $color2) {
+  background: repeating-linear-gradient(
+    45deg,
+    $color1,
+    $color1 50%,
+    $color2 50%,
+    $color2
+  );
+  background-size: 20px 20px;
+}

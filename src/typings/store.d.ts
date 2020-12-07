@@ -1,9 +1,7 @@
-import { StateType, ActionType } from "typesafe-actions";
+import { ThunkAction } from "redux-thunk";
 
-export type Store = StateType<typeof import("../store/index").default>;
-export type RootState = StateType<
-  ReturnType<typeof import("../store/root-reducer").default>
+export type RootState = ReturnType<
+  typeof import("../store/root-reducer").default
 >;
-export type RootAction = ActionType<
-  typeof import("../store/root-action").default
->;
+export type AppDispatch = typeof import("../store/index").default["dispatch"];
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;

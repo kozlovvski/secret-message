@@ -28,7 +28,7 @@ interface IHomePageProps extends RouteChildrenProps {
  */
 
 const LazyHomePage: React.FC<IHomePageProps> = (props) => (
-  <Suspense fallback={null}>
+  <Suspense data-testid="suspense" fallback={null}>
     <HomeComponent {...props} />
   </Suspense>
 );
