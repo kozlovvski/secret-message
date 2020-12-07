@@ -62,7 +62,7 @@ test firebase functions:
     - cd functions
     - yarn
     - yarn global add json
-    - json -I -f service-account.json \
+    - json -f service-account.json \
       -e "this.type='$TYPE'" \
       -e "this.project_id='$PROJECT_ID'" \
       -e "this.private_key_id='$PRIVATE_KEY_ID'" \
